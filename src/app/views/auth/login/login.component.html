@@ -1,0 +1,25 @@
+<div class="container col-md-4 offset-md-4 form-login">
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <p>{{ errorMessage }}</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
+  </div>
+
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card-body">
+      <h1>Login</h1>
+      <hr>
+
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Usuário: *</label>
+          <input type="text" name="username" [(ngModel)]="username" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Senha: *</label>
+          <input type="password" name="password" [(ngModel)]="password" class="form-control">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="login()">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div>

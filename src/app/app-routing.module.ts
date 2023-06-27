@@ -1,25 +1,38 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/auth.guard';
+import { DashboardComponent } from './views/layouts/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+    component: DashboardComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+      },
+      {
+        path: 'home',
+        loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+      },
+      {
+        path: 'categories',
+        loadChildren: () => import('./modules/categories/categories.module').then(m => m.CategoriesModule),
+      },
+    ]
   },
   {
-    path: 'home',
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
-  },
-  {
-    path: 'categories',
-    loadChildren: () => import('./modules/categories/categories.module').then(m => m.CategoriesModule)
+    path: 'login',
+    loadChildren: () => import('./modules/auth/login/login.module').then(m => m.LoginModule)
   },
   {
     path: '',
-    redirectTo: '/',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
-
 ];
 
 @NgModule({
