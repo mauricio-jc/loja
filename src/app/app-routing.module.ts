@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import { DashboardComponent } from './views/layouts/dashboard/dashboard.component';
+import { LoginGuard } from './auth/login.guard';
 
 const routes: Routes = [
   {
@@ -26,7 +27,9 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./modules/auth/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./modules/auth/login/login.module').then(m => m.LoginModule),
+    canLoad: [LoginGuard],
+    canActivate: [LoginGuard]
   },
   {
     path: '',

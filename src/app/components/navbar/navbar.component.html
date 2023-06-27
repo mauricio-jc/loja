@@ -13,6 +13,13 @@
           <a class="nav-link" [routerLink]="['/categories']">Categorias</a>
         </li>
       </ul>
+      <ul *ngIf="user$ | async as user" class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link logout" (click)="logout()">
+            Olá {{ user.name }}! Sair
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
