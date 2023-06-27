@@ -18,6 +18,9 @@
           <label class="form-label">Senha: *</label>
           <input type="password" name="password" [(ngModel)]="password" class="form-control">
         </div>
+        <div class="mb-3">
+          <a [routerLink]="['/signup']">Cadastre-se</a>
+        </div>
         <button type="button" class="btn btn-primary" (click)="login()">Entrar</button>
       </form>
     </div>
