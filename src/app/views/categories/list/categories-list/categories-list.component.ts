@@ -28,7 +28,7 @@ export class CategoriesListComponent implements OnInit {
     if (result) {
       this.categoriesService.delete(Number(id)).subscribe(() => {
         this.listAll();
-      })
+      });
     }
 
     return;

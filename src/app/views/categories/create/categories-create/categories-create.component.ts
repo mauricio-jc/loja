@@ -9,7 +9,6 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./categories-create.component.css']
 })
 export class CategoriesCreateComponent implements OnInit {
-
   name: string = "";
   errorsMessages: Array<string> = [];
   error: boolean = false;

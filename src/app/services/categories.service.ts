@@ -17,8 +17,16 @@ export class CategoriesService {
     return this.httpClient.get<Categorie[]>(`${this.api}/categories`);
   }
 
+  find(id: string): Observable<Categorie> {
+    return this.httpClient.get<Categorie>(`${this.api}/categories/${id}`);
+  }
+
   create(categorie: Categorie): Observable<Categorie> {
     return this.httpClient.post<Categorie>(`${this.api}/categories/create`, categorie);
+  }
+
+  update(id: string, name: {}): Observable<any> {
+    return this.httpClient.put<any>(`${this.api}/categories/edit/${id}`, name);
   }
 
   delete(id: number): Observable<any> {
