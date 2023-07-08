@@ -15,7 +15,7 @@ import { DashboardComponent } from './views/layouts/dashboard/dashboard.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

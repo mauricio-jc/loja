@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -9,8 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: string = "";
-  password: string = "";
+  loginForm!: FormGroup;
   errorMessage: string = "";
   error: boolean = false;
 
@@ -21,6 +21,18 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
+
+  get username() {
+    return this.loginForm.get('username')!;
+  }
+
+  get password() {
+    return this.loginForm.get('password')!;
   }
 
   hideAlert() {
@@ -28,10 +40,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    const data = {
-      username: this.username,
-      password: this.password
+    if(this.loginForm.invalid) {
+      return;
     }
+
+    const data = this.loginForm.value;
 
     this.authService.login(data)
     .subscribe({

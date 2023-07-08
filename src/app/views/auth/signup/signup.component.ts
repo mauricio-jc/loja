@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,10 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  name: string = "";
-  username: string = "";
-  email: string = "";
-  password: string = "";
+  signUpForm!: FormGroup;
   success: boolean = false;
   error: boolean = false;
   errorsMessages: Array<string> = [];
@@ -22,6 +20,28 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.signUpForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
+
+  get name() {
+    return this.signUpForm.get('name')!;
+  }
+
+  get username() {
+    return this.signUpForm.get('username')!;
+  }
+
+  get email() {
+    return this.signUpForm.get('email')!;
+  }
+
+  get password() {
+    return this.signUpForm.get('password')!;
   }
 
   hideAlertSuccess() {
@@ -33,14 +53,13 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
+    if(this.signUpForm.invalid) {
+      return;
+    }
+
     this.errorsMessages = [];
 
-    const data = {
-      name: this.name,
-      username: this.username,
-      email: this.email,
-      password: this.password
-    };
+    const data = this.signUpForm.value;
 
     this.authService.signUp(data)
     .subscribe({
