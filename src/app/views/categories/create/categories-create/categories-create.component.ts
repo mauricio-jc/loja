@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriesService } from 'src/app/services/categories.service';
 
@@ -9,7 +10,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./categories-create.component.css']
 })
 export class CategoriesCreateComponent implements OnInit {
-  name: string = "";
+  form!: FormGroup;
   errorsMessages: Array<string> = [];
   error: boolean = false;
 
@@ -20,6 +21,13 @@ export class CategoriesCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required])
+    })
+  }
+
+  get name() {
+    return this.form.get('name')!;
   }
 
   hideAlert() {
@@ -27,11 +35,11 @@ export class CategoriesCreateComponent implements OnInit {
   }
 
   create() {
-    const data = {
-      name: this.name
-    };
+    if(this.form.invalid) {
+      return;
+    }
 
-    this.categoriesService.create(data)
+    this.categoriesService.create(this.form.value)
     .subscribe({
       next: () => {
         this.router.navigate(['/categories']);
