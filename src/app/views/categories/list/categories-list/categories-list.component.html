@@ -1,32 +1,33 @@
-<h1>
-  Categorias
-  <a [routerLink]="['/categories/create']" class="btn btn-success mb-2">Adicionar</a>
-</h1>
+<h1>Categorias</h1>
+<a [routerLink]="['/categories/create']" class="btn btn-success">Adicionar</a>
 <hr>
 
-<table class="table table-bordered table-hover table-sm">
-  <thead>
-    <tr>
-      <th width="100px" class="text-center">ID</th>
-      <th>Nome</th>
-      <th class="text-center">Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let categorie of categories">
-      <td class="text-center">{{ categorie.id }}</td>
-      <td>{{ categorie.name }}</td>
-      <td width="250px" class="text-center">
-        <button 
-          type="button"
-          class="btn btn-primary btn-sm mx-2"
-          [routerLink]="['/categories/edit/', categorie.id]"
-        >
-          Editar
-        </button>
-        <button type="button" class="btn btn-danger btn-sm" (click)="delete(categorie.id)">Excluir</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+<div class="card shadow bg-white rounded">
+  <div class="card-body px-0">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th>Nome</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categorie of categories">
+          <td class="text-center">{{ categorie.id }}</td>
+          <td>{{ categorie.name }}</td>
+          <td class="text-center">
+            <button
+              type="button"
+              class="btn btn-primary mx-1"
+              [routerLink]="['/categories/edit/', categorie.id]"
+            >
+              Editar
+            </button>
+            <button type="button" class="btn btn-danger mx-1" (click)="delete(categorie.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -15,7 +15,7 @@
           <input
             type="text"
             formControlName="username"
-            class="form-control"
+            class="form-control form-control-lg"
             [class.is-invalid] = "username.invalid && formDir.submitted"
           >
           <div *ngIf="username.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
@@ -25,7 +25,7 @@
           <input
             type="password"
             formControlName="password"
-            class="form-control"
+            class="form-control form-control-lg"
             [class.is-invalid] = "password.invalid && formDir.submitted"
           >
           <div *ngIf="password.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
@@ -33,7 +33,7 @@
         <div class="mb-3">
           <a [routerLink]="['/signup']">Cadastre-se</a>
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
+        <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
       </form>
     </div>
   </div>
