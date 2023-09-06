@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,9 +18,11 @@ export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit(): void {
+    this.loadingService.hide();
     this.signUpForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
@@ -52,6 +55,11 @@ export class SignupComponent implements OnInit {
     this.error = false;
   }
 
+  navigation(): void {
+    this.loadingService.show();
+    this.loadingService.setMessage('');
+  }
+
   signUp() {
     if(this.signUpForm.invalid) {
       return;
@@ -60,6 +68,7 @@ export class SignupComponent implements OnInit {
     this.errorsMessages = [];
 
     const data = this.signUpForm.value;
+    this.loadingService.setMessage('Cadastrando...');
 
     this.authService.signUp(data)
     .subscribe({

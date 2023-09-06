@@ -1,40 +1,42 @@
-<div class="container col-md-4 offset-md-4 form-login">
-  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
-    <p>{{ errorMessage }}</p>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
-  </div>
+<div class="container col-md-4 offset-md-4">
+  <div class="form-login">
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <p>{{ errorMessage }}</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
+    </div>
 
-  <div class="card shadow p-3 mb-5 bg-white rounded">
-    <div class="card-body">
-      <h1>Login</h1>
-      <hr>
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <h1>Login</h1>
+        <hr>
 
-      <form (ngSubmit)="login()" [formGroup]="loginForm" #formDir="ngForm">
-        <div class="mb-3">
-          <label class="form-label">Usuário: *</label>
-          <input
-            type="text"
-            formControlName="username"
-            class="form-control form-control-lg"
-            [class.is-invalid] = "username.invalid && formDir.submitted"
-          >
-          <div *ngIf="username.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Senha: *</label>
-          <input
-            type="password"
-            formControlName="password"
-            class="form-control form-control-lg"
-            [class.is-invalid] = "password.invalid && formDir.submitted"
-          >
-          <div *ngIf="password.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
-        </div>
-        <div class="mb-3">
-          <a [routerLink]="['/signup']">Cadastre-se</a>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
-      </form>
+        <form (ngSubmit)="login()" [formGroup]="loginForm" #formDir="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Usuário: *</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control form-control-lg"
+              [class.is-invalid] = "username.invalid && formDir.submitted"
+            >
+            <div *ngIf="username.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Senha: *</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control form-control-lg"
+              [class.is-invalid] = "password.invalid && formDir.submitted"
+            >
+            <div *ngIf="password.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <a [routerLink]="['/signup']" (click)="navigation()">Cadastre-se</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Entrar</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

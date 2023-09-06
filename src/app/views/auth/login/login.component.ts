@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -17,10 +18,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private loadingService: LoadingService
   ) { }
 
   ngOnInit(): void {
+    this.loadingService.hide();
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -39,11 +42,17 @@ export class LoginComponent implements OnInit {
     this.error = false;
   }
 
+  navigation(): void {
+    this.loadingService.show();
+    this.loadingService.setMessage('');
+  }
+
   login() {
     if(this.loginForm.invalid) {
       return;
     }
 
+    this.loadingService.setMessage('Autenticando...');
     const data = this.loginForm.value;
 
     this.authService.login(data)

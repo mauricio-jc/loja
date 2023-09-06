@@ -1,67 +1,69 @@
-<div class="container col-md-4 offset-md-4 form-login">
-  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
-    <ul>
-      <li *ngFor="let error of errorsMessages">{{ error }}</li>
-    </ul>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlertError()"></button>
-  </div>
+<div class="container col-md-4 offset-md-4">
+  <div class="form-login">
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <ul>
+        <li *ngFor="let error of errorsMessages">{{ error }}</li>
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlertError()"></button>
+    </div>
 
-  <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
-    <p>Cadastro efetuado com sucesso!</p>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlertSuccess()"></button>
-  </div>
+    <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+      <p>Cadastro efetuado com sucesso!</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlertSuccess()"></button>
+    </div>
 
-  <div class="card shadow p-3 mb-5 bg-white rounded">
-    <div class="card-body">
-      <h1>Cadastre-se</h1>
-      <hr>
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <h1>Cadastre-se</h1>
+        <hr>
 
-      <form (ngSubmit)="signUp()" [formGroup]="signUpForm" #formDir="ngForm">
-        <div class="mb-3">
-          <label class="form-label">Nome: *</label>
-          <input
-            type="text"
-            formControlName="name"
-            class="form-control"
-            [class.is-invalid]="name.invalid && formDir.submitted"
-          >
-          <div *ngIf="name.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Usuário: *</label>
-          <input
-            type="text"
-            formControlName="username"
-            class="form-control"
-            [class.is-invalid]="username.invalid && formDir.submitted"
-          >
-          <div *ngIf="username.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">E-mail: *</label>
-          <input
-            type="email"
-            formControlName="email"
-            class="form-control"
-            [class.is-invalid]="email.invalid && formDir.submitted"
-          >
-          <div *ngIf="email.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Senha: *</label>
-          <input
-            type="password"
-            formControlName="password"
-            class="form-control"
-            [class.is-invalid]="password.invalid && formDir.submitted"
-          >
-          <div *ngIf="password.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
-        </div>
-        <div class="mb-3">
-          <a [routerLink]="['/login']">Login</a>
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-      </form>
+        <form (ngSubmit)="signUp()" [formGroup]="signUpForm" #formDir="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Nome: *</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control form-control-lg"
+              [class.is-invalid]="name.invalid && formDir.submitted"
+            >
+            <div *ngIf="name.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Usuário: *</label>
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control form-control-lg"
+              [class.is-invalid]="username.invalid && formDir.submitted"
+            >
+            <div *ngIf="username.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">E-mail: *</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control form-control-lg"
+              [class.is-invalid]="email.invalid && formDir.submitted"
+            >
+            <div *ngIf="email.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Senha: *</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control form-control-lg"
+              [class.is-invalid]="password.invalid && formDir.submitted"
+            >
+            <div *ngIf="password.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <a [routerLink]="['/login']" (click)="navigation()">Login</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Cadastrar</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
