@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
 
   navigation(): void {
     this.loadingService.show();
-    this.loadingService.setMessage('');
   }
 
   login() {
@@ -52,7 +51,6 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loadingService.setMessage('Autenticando...');
     const data = this.loginForm.value;
 
     this.authService.login(data)

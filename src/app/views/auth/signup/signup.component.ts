@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
@@ -17,7 +16,6 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
     private loadingService: LoadingService
   ) { }
 
@@ -57,7 +55,6 @@ export class SignupComponent implements OnInit {
 
   navigation(): void {
     this.loadingService.show();
-    this.loadingService.setMessage('');
   }
 
   signUp() {
@@ -68,7 +65,6 @@ export class SignupComponent implements OnInit {
     this.errorsMessages = [];
 
     const data = this.signUpForm.value;
-    this.loadingService.setMessage('Cadastrando...');
 
     this.authService.signUp(data)
     .subscribe({

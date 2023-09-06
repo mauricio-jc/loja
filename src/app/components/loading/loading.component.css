@@ -8,16 +8,9 @@
 
 .spinner-container .back {
   background-color: #fff;
-  padding-right: 30px !important;
 }
 
 .spinner-container .back .spinner-border {
   width: 3rem;
   height: 3rem;
-  float: left;
-}
-
-.spinner-container .back .text {
-  float: right;
-  padding-top: 10px;
 }

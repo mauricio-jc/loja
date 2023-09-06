@@ -6,10 +6,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class LoadingService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
-  private messageSubject = new BehaviorSubject<string>('');
+  // private messageSubject = new BehaviorSubject<string>('');
 
   loading$: Observable<boolean> = this.loadingSubject.asObservable();
-  message$: Observable<string> = this.messageSubject.asObservable();
+  // message$: Observable<string> = this.messageSubject.asObservable();
 
   constructor() { }
 
@@ -21,7 +21,7 @@ export class LoadingService {
     this.loadingSubject.next(true);
   }
 
-  setMessage(message: string): void {
-    this.messageSubject.next(message);
-  }
+  // setMessage(message: string): void {
+  //   this.messageSubject.next(message);
+  // }
 }
