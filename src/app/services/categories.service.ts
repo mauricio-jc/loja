@@ -9,7 +9,6 @@ import { UsersService } from './users.service';
   providedIn: 'root'
 })
 export class CategoriesService {
-
   private api: string = environment.api;
   private headers: Object = {};
 

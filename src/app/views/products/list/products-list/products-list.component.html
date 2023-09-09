@@ -1,1 +1,41 @@
-<p>products-list works!</p>
+<h1>Produtos</h1>
+<a [routerLink]="['/products/create']" class="btn btn-success">Adicionar</a>
+<hr>
+
+<div class="card shadow bg-white rounded">
+  <div class="card-body px-0">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th class="text-center image">Imagem</th>
+          <th>Nome</th>
+          <th class="text-center">Preço</th>
+          <th class="text-center">Estoque</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="text-center">{{ product.id }}</td>
+          <td class="text-center image">
+            <img src="{{ api }}/products/image/{{ product.image1 }}" class="image">
+          </td>
+          <td>{{ product.name }}</td>
+          <td class="text-center">{{ product.price | currency }}</td>
+          <td class="text-center">{{ product.quantity }}</td>
+          <td class="text-center">
+            <button
+              type="button"
+              class="btn btn-primary mx-1"
+              [routerLink]="['/products/edit/', product.id]"
+            >
+              Editar
+            </button>
+            <button type="button" class="btn btn-danger mx-1" (click)="delete(product.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

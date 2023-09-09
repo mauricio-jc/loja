@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,6 +7,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './views/layouts/dashboard/dashboard.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -26,7 +30,15 @@ import { LoadingInterceptor } from './interceptors/loading.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt'
+    },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL'
+    },
   ],
   bootstrap: [AppComponent]
 })
