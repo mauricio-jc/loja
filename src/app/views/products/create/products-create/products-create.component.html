@@ -1,0 +1,130 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h1>Adicionar produto</h1>
+    <a [routerLink]="['/products']" class="btn btn-success">Voltar</a>
+    <hr>
+
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <ul>
+        <li *ngFor="let error of errorsMessages">{{ error }}</li>
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
+    </div>
+
+    <div class="card shadow bg-white rounded mb-3">
+      <div class="card-body">
+        <form (ngSubmit)="create()" [formGroup]="form" #formDir="ngForm" class="row">
+          <div class="image-upload col-md-6">
+            <label
+              for="image-1"
+              class="thumbnail thumbnail-empty"
+              *ngIf="!preview1 else previewImage1"
+              [class.is-invalid]="image1.invalid && formDir.submitted"
+            >
+              <p id="image-icon" class="text-center">Imagem</p>
+              <input
+                type="file"
+                formControlName="image1"
+                id="image-1"
+                class="input-file"
+                (change)="readURL($event.target, 'image1')"
+              >
+            </label>
+
+            <ng-template #previewImage1>
+              <div class="thumbnail">
+                <img [src]="preview1">
+                <button type="button" class="btn btn-danger btn-close" (click)="removeImage('image1')">X</button>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="image-upload col-md-6">
+            <label
+              for="image-2"
+              class="thumbnail thumbnail-empty"
+              *ngIf="!preview2 else previewImage2"
+              [class.is-invalid]="image1.invalid && formDir.submitted"
+            >
+              <p id="image-icon" class="text-center">Imagem</p>
+              <input
+                type="file"
+                formControlName="image2"
+                id="image-2"
+                class="input-file"
+                (change)="readURL($event.target, 'image2')"
+              >
+            </label>
+
+            <ng-template #previewImage2>
+              <div class="thumbnail">
+                <img [src]="preview2">
+                <button type="button" class="btn btn-danger btn-close" (click)="removeImage('image2')">X</button>
+              </div>
+            </ng-template>
+          </div>
+
+          <div class="mb-4 col-md-12">
+            <label class="form-label">Nome: *</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control form-control-lg"
+              [class.is-invalid]="name.invalid && formDir.submitted"
+            >
+            <div *ngIf="name.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-4 col-md-4">
+            <label class="form-label">Preço: *</label>
+            <input
+              type="text"
+              formControlName="price"
+              class="form-control form-control-lg"
+              [class.is-invalid]="price.invalid && formDir.submitted"
+            >
+            <div *ngIf="price.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-4 col-md-4">
+            <label class="form-label">Estoque: *</label>
+            <input
+              type="text"
+              formControlName="quantity"
+              class="form-control form-control-lg"
+              [class.is-invalid]="quantity.invalid && formDir.submitted"
+            >
+            <div *ngIf="quantity.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-4 col-md-4">
+            <label class="form-label">Categoria: *</label>
+            <select
+              formControlName="categoryId"
+              class="form-select form-select-lg"
+              [class.is-invalid]="categoryId.invalid && formDir.submitted"
+            >
+              <option>----Selecione----</option>
+              <option *ngFor="let categorie of categories" value="{{ categorie.id }}">
+                {{ categorie.name }}
+              </option>
+            </select>
+            <div *ngIf="categoryId.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-4 col-md-12">
+            <label class="form-label">Descrição: *</label>
+            <textarea
+              formControlName="description"
+              cols="30"
+              rows="5"
+              class="form-control form-control-lg"
+              [class.is-invalid]="description.invalid && formDir.submitted"
+            >
+            </textarea>
+            <div *ngIf="description.invalid && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3 col-md-12">
+            <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
