@@ -18,7 +18,6 @@ export class ProductsService {
   ) {
     this.headers = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.usersService.getAccessToken()}`
       })
     }
@@ -32,9 +31,9 @@ export class ProductsService {
   //   return this.httpClient.get<Categorie>(`${this.api}/categories/${id}`, this.headers);
   // }
 
-  // create(categorie: Categorie): Observable<Categorie> {
-  //   return this.httpClient.post<Categorie>(`${this.api}/categories/create`, categorie, this.headers);
-  // }
+  create(product: any): Observable<Product> {
+    return this.httpClient.post<Product>(`${this.api}/products/create`, product, this.headers);
+  }
 
   // update(id: string, name: {}): Observable<any> {
   //   return this.httpClient.put<any>(`${this.api}/categories/edit/${id}`, name, this.headers);

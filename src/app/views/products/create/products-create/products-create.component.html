@@ -34,7 +34,7 @@
             <ng-template #previewImage1>
               <div class="thumbnail">
                 <img [src]="preview1">
-                <button type="button" class="btn btn-danger btn-close" (click)="removeImage('image1')">X</button>
+                <button type="button" class="btn btn-danger" (click)="removeImage('image1')">X</button>
               </div>
             </ng-template>
           </div>
@@ -44,7 +44,6 @@
               for="image-2"
               class="thumbnail thumbnail-empty"
               *ngIf="!preview2 else previewImage2"
-              [class.is-invalid]="image1.invalid && formDir.submitted"
             >
               <p id="image-icon" class="text-center">Imagem</p>
               <input
@@ -57,9 +56,9 @@
             </label>
 
             <ng-template #previewImage2>
-              <div class="thumbnail">
+              <div class="thumbnail text-center">
                 <img [src]="preview2">
-                <button type="button" class="btn btn-danger btn-close" (click)="removeImage('image2')">X</button>
+                <button type="button" class="btn btn-danger" (click)="removeImage('image2')">X</button>
               </div>
             </ng-template>
           </div>
@@ -79,6 +78,8 @@
             <input
               type="text"
               formControlName="price"
+              currencyMask
+              [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2, align: 'left' }"
               class="form-control form-control-lg"
               [class.is-invalid]="price.invalid && formDir.submitted"
             >
@@ -89,6 +90,7 @@
             <input
               type="text"
               formControlName="quantity"
+              onlyNumber
               class="form-control form-control-lg"
               [class.is-invalid]="quantity.invalid && formDir.submitted"
             >

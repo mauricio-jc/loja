@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Categorie } from 'src/app/interfaces/categorie';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-products-create',
@@ -14,12 +16,14 @@ export class ProductsCreateComponent implements OnInit {
   errorsMessages: Array<string> = [];
   error: boolean = false;
   image1Preview: File | any = null;
-  preview1: string = '';
+  preview1: any = '';
   image2Preview: File | any = null;
-  preview2: string = '';
+  preview2: any = '';
 
   constructor(
+    private router: Router,
     private categoriesServices: CategoriesService,
+    private productsServices: ProductsService,
   ) { }
 
   get image1(): any {
@@ -112,14 +116,42 @@ export class ProductsCreateComponent implements OnInit {
   removeImage(image: string): void {
     if(image == 'image1') {
       this.image1Preview = null;
-      this.preview1 = '';
+      this.preview1 = null;
+      this.image1.setValue('');
     }
     else {
       this.image2Preview = null;
-      this.preview2 = '';
+      this.preview2 = null;
+      this.image2.setValue('');
     }
-
   }
 
-  create() {}
+  create(): void {
+    if (!this.form.valid) {
+      return;
+    }
+
+    const data = this.form.value;
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('price', data.price);
+    formData.append('quantity', data.quantity);
+    formData.append('description', data.description);
+    formData.append('category_id', data.categoryId);
+    formData.append('images', data.image1Source);
+
+    if(data.image2 !== "") {
+      formData.append('images', data.image2Source);
+    }
+
+    this.productsServices.create(formData).subscribe({
+      next: () => {
+        this.router.navigate(['/products']);
+      },
+      error: (responseError) => {
+        this.error = responseError;
+        this.errorsMessages = responseError.error.message
+      }
+    });
+  }
 }

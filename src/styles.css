@@ -7,3 +7,62 @@ body {
 body .body-content {
   margin-bottom: 150px;
 }
+
+.image-upload {
+  margin-bottom: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.image-upload .thumbnail {
+  position: relative;
+  padding: 5px;
+  border: 1px solid #dee2e6;
+  width: 400px;
+  border-radius: 6px;
+}
+
+.image-upload .thumbnail .btn-danger {
+  position: absolute;
+  top: -10px;
+  right: -16px;
+  border-radius: 25%;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  z-index: 1000;
+  cursor: pointer;
+
+}
+
+.image-upload .thumbnail img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+}
+
+.image-upload .thumbnail-empty {
+  cursor: pointer;
+  height: 250px;
+  position: relative;
+}
+
+.image-upload .is-invalid {
+  border-color: #dc3545;
+}
+
+.image-upload .thumbnail-empty #image-icon {
+  position: absolute;
+  top: 45%;
+  text-align: center;
+  display: block !important;
+  width: 100% !important;
+}
+
+.image-upload .thumbnail-empty #image-1,
+.image-upload .thumbnail-empty #image-2 {
+  display: none;
+}
