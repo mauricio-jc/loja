@@ -21,7 +21,11 @@ body .body-content {
   padding: 5px;
   border: 1px solid #dee2e6;
   width: 400px;
+  height: 280px;
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .image-upload .thumbnail .btn-danger {
@@ -46,7 +50,7 @@ body .body-content {
 
 .image-upload .thumbnail-empty {
   cursor: pointer;
-  height: 250px;
+  height: 280px;
   position: relative;
 }
 
@@ -64,5 +68,15 @@ body .body-content {
 
 .image-upload .thumbnail-empty #image-1,
 .image-upload .thumbnail-empty #image-2 {
+  display: none;
+}
+
+.image-upload .btn-success,
+.image-upload .btn-success .for-image {
+  cursor: pointer;
+}
+
+.image-upload .btn-success #image-1,
+.image-upload .btn-success #image-2 {
   display: none;
 }

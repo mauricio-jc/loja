@@ -25,13 +25,18 @@
           <td class="text-center">{{ product.price | currency }}</td>
           <td class="text-center">{{ product.quantity }}</td>
           <td class="text-center">
-            <button
-              type="button"
+            <a
+              class="btn btn-info text-white mx-1"
+              [routerLink]="['/products/view/', product.id]"
+            >
+              Visualizar
+            </a>
+            <a
               class="btn btn-primary mx-1"
               [routerLink]="['/products/edit/', product.id]"
             >
               Editar
-            </button>
+            </a>
             <button type="button" class="btn btn-danger mx-1" (click)="delete(product.id)">Excluir</button>
           </td>
         </tr>

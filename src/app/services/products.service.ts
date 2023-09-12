@@ -27,19 +27,19 @@ export class ProductsService {
     return this.httpClient.get<Product[]>(`${this.api}/products`, this.headers);
   }
 
-  // find(id: string): Observable<Categorie> {
-  //   return this.httpClient.get<Categorie>(`${this.api}/categories/${id}`, this.headers);
-  // }
+  find(id: string): Observable<Product> {
+    return this.httpClient.get<Product>(`${this.api}/products/${id}`, this.headers);
+  }
 
   create(product: any): Observable<Product> {
     return this.httpClient.post<Product>(`${this.api}/products/create`, product, this.headers);
   }
 
-  // update(id: string, name: {}): Observable<any> {
-  //   return this.httpClient.put<any>(`${this.api}/categories/edit/${id}`, name, this.headers);
-  // }
+  update(id: string, product: any): Observable<Product> {
+    return this.httpClient.put<Product>(`${this.api}/products/edit/${id}`, product, this.headers);
+  }
 
-  // delete(id: number): Observable<any> {
-  //   return this.httpClient.delete<any>(`${this.api}/categories/delete/${id}`, this.headers);
-  // }
+  delete(id: string): Observable<any> {
+    return this.httpClient.delete<any>(`${this.api}/products/delete/${id}`, this.headers);
+  }
 }

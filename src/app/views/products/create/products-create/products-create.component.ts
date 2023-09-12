@@ -55,7 +55,9 @@ export class ProductsCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listCategories();
+    this.categoriesServices.listAll().subscribe((response) => {
+      this.categories = response;
+    });
 
     this.form = new FormGroup({
       image1: new FormControl('', [Validators.required]),
@@ -67,12 +69,6 @@ export class ProductsCreateComponent implements OnInit {
       quantity: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       categoryId: new FormControl('', [Validators.required])
-    });
-  }
-
-  listCategories() {
-    this.categoriesServices.listAll().subscribe((r) => {
-      this.categories = r;
     });
   }
 

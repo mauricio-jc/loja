@@ -103,7 +103,7 @@
               class="form-select form-select-lg"
               [class.is-invalid]="categoryId.invalid && formDir.submitted"
             >
-              <option>----Selecione----</option>
+              <option value="">----Selecione----</option>
               <option *ngFor="let categorie of categories" value="{{ categorie.id }}">
                 {{ categorie.name }}
               </option>
