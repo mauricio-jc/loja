@@ -12,6 +12,7 @@
           <th>Nome</th>
           <th class="text-center">Preço</th>
           <th class="text-center">Estoque</th>
+          <th>Categoria</th>
           <th class="text-center">Ações</th>
         </tr>
       </thead>
@@ -24,6 +25,7 @@
           <td>{{ product.name }}</td>
           <td class="text-center">{{ product.price | currency }}</td>
           <td class="text-center">{{ product.quantity }}</td>
+          <td>{{ product.category?.name }}</td>
           <td class="text-center">
             <a
               class="btn btn-info text-white mx-1"

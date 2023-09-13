@@ -2,6 +2,13 @@
 <a [routerLink]="['/categories/create']" class="btn btn-success">Adicionar</a>
 <hr>
 
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <ul>
+    <li *ngFor="let error of errorsMessages">{{ error }}</li>
+  </ul>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
+</div>
+
 <div class="card shadow bg-white rounded">
   <div class="card-body px-0">
     <table class="table table-hover table-striped">

@@ -8,8 +8,9 @@ import { CategoriesService } from 'src/app/services/categories.service';
   styleUrls: ['./categories-list.component.css']
 })
 export class CategoriesListComponent implements OnInit {
-
   categories: Array<Categorie> = [];
+  errorsMessages: Array<any> = [];
+  error: boolean = false;
 
   constructor(private categoriesService: CategoriesService) { }
 
@@ -23,11 +24,27 @@ export class CategoriesListComponent implements OnInit {
     })
   }
 
+  hideAlert() {
+    this.error = false;
+  }
+
   delete(id: number | undefined) {
     let result = confirm("Confirma a exclusão?");
     if (result) {
-      this.categoriesService.delete(Number(id)).subscribe(() => {
-        this.listAll();
+      this.categoriesService.delete(Number(id)).subscribe({
+        next: () => {
+          this.listAll();
+        },
+        error: (responseError) => {
+          this.error = true;
+
+          if(Array.isArray(responseError.error.message)) {
+            this.errorsMessages = responseError.error.message;
+          }
+          else {
+            this.errorsMessages[0] = responseError.error.message;
+          }
+        }
       });
     }
 

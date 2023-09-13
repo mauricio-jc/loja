@@ -27,9 +27,9 @@ export class ProductsListComponent implements OnInit {
   delete(id: number | undefined) {
     let result = confirm("Confirma a exclusão?");
     if (result) {
-      // this.productsServices.delete(Number(id)).subscribe(() => {
-      //   this.listAll();
-      // });
+      this.productsServices.delete(Number(id)).subscribe(() => {
+        this.listAll();
+      });
     }
 
     return;
