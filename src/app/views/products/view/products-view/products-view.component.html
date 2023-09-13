@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h1>{{ product.name }}</h1>
+    <a [routerLink]="['/products']" class="btn btn-success">Voltar</a>
+    <hr>
+
+    <div class="card shadow bg-white rounded mb-3">
+      <div class="card-body">
+        <div
+          class="row"
+          [class.justify-content-center]="productImage2 == ''"
+        >
+          <div class="image-upload col-md-6">
+            <div class="thumbnail text-center">
+              <img [src]="productImage1">
+            </div>
+          </div>
+
+          <div class="image-upload col-md-6" *ngIf="productImage2 != ''">
+            <div class="thumbnail text-center">
+              <img [src]="productImage2">
+            </div>
+          </div>
+
+          <p>
+            <strong>Preço: </strong> {{ product.price | currency }}
+          </p>
+          <p>
+            <strong>Estoque: </strong> {{ product.quantity }}
+          </p>
+          <p>
+            <strong>Categoria: </strong> {{ product.category?.name }}
+          </p>
+          <p>
+            <strong>Descrição: </strong> {{ product.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

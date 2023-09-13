@@ -7,12 +7,14 @@ import { ProductsCreateComponent } from 'src/app/views/products/create/products-
 import { ProductsEditComponent } from 'src/app/views/products/edit/products-edit/products-edit.component';
 import { OnlyNumberDirective } from 'src/app/shared/directives/only-number.directive';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { ProductsViewComponent } from 'src/app/views/products/view/products-view/products-view.component';
 
 @NgModule({
   declarations: [
     ProductsListComponent,
     ProductsCreateComponent,
     ProductsEditComponent,
+    ProductsViewComponent,
     OnlyNumberDirective,
   ],
   imports: [
