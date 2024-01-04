@@ -2,16 +2,27 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 import { User } from '../interfaces/user';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-
+  private api: string = environment.api;
+  private headers: Object = {};
   private userData = new BehaviorSubject<User>({});
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     const accessToken = this.getAccessToken();
+    
+    this.headers = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      })
+    }
+
     if(accessToken !== null) {
       this.set(accessToken);
     }
@@ -28,11 +39,13 @@ export class UsersService {
   }
 
   set(accessToken: string): void {
-    const user = jwt_decode(accessToken) as User;
-    this.userData.next({
-      sub: user.sub,
-      email: user.email,
-      name: user.name
+    const jsonWebTokenDecoded = jwt_decode(accessToken) as any;
+    this.find(jsonWebTokenDecoded.sub).subscribe(response => {
+      this.userData.next({
+        sub: response.id,
+        email: response.email,
+        name: response.name
+      });
     });
   }
 
@@ -42,5 +55,9 @@ export class UsersService {
 
   getAccessToken(): string | null {
     return localStorage.getItem('access_token') ?? null;
+  }
+
+  find(id: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.api}/users/${id}`, this.headers);
   }
 }
