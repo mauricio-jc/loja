@@ -21,7 +21,7 @@ export class CategoriesListComponent implements OnInit {
   }
 
   listAll() {
-    const response = this.categoriesService.listAll().subscribe((r) => {
+    this.categoriesService.listAll().subscribe((r) => {
       this.categories = r;
     })
   }

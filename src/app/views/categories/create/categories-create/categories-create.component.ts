@@ -11,7 +11,7 @@ import { CategoriesService } from 'src/app/services/categories.service';
 })
 export class CategoriesCreateComponent implements OnInit {
   form!: FormGroup;
-  errorsMessages: Array<string> = [];
+  errorsMessages: Array<any> = [];
   error: boolean = false;
 
   constructor(
@@ -46,7 +46,13 @@ export class CategoriesCreateComponent implements OnInit {
       },
       error: (responseError) => {
         this.error = true;
-        this.errorsMessages = responseError.error.message;
+
+        if(Array.isArray(responseError.error.message)) {
+          this.errorsMessages = responseError.error.message;
+        }
+        else {
+          this.errorsMessages[0] = responseError.error.message;
+        }
       }
     });
   }
