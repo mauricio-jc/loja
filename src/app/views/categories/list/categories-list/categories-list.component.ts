@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categorie } from 'src/app/interfaces/categorie';
 import { CategoriesService } from 'src/app/services/categories.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-categories-list',
@@ -11,8 +12,9 @@ export class CategoriesListComponent implements OnInit {
   categories: Array<Categorie> = [];
   errorsMessages: Array<any> = [];
   error: boolean = false;
+  roles$ = this.usersService.getRoles();
 
-  constructor(private categoriesService: CategoriesService) { }
+  constructor(private categoriesService: CategoriesService, private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.listAll();

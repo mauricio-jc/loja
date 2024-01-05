@@ -9,6 +9,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class NavbarComponent implements OnInit {
   user$ = this.usersService.get();
+  roles$ = this.usersService.getRoles();
 
   constructor(private usersService: UsersService, private router: Router) { }
 

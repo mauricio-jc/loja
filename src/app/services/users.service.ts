@@ -12,6 +12,7 @@ export class UsersService {
   private api: string = environment.api;
   private headers: Object = {};
   private userData = new BehaviorSubject<User>({});
+  private roles = new BehaviorSubject<any>(null);
 
   constructor(private httpClient: HttpClient) {
     const accessToken = this.getAccessToken();
@@ -25,6 +26,7 @@ export class UsersService {
 
     if(accessToken !== null) {
       this.set(accessToken);
+      this.setRoles();
     }
   }
 
@@ -49,6 +51,16 @@ export class UsersService {
     });
   }
 
+  setRoles(): void {
+    this.userRoles().subscribe(response => {
+      this.roles.next(response.roles);
+    });
+  }
+
+  getRoles(): Observable<any> {
+    return this.roles.asObservable();
+  }
+
   get(): Observable<User> {
     return this.userData.asObservable();
   }
@@ -59,5 +71,9 @@ export class UsersService {
 
   find(id: string): Observable<User> {
     return this.httpClient.get<User>(`${this.api}/users/${id}`, this.headers);
+  }
+
+  userRoles(): Observable<any> {
+    return this.httpClient.get<any>(`${this.api}/users/roles`, this.headers);
   }
 }
