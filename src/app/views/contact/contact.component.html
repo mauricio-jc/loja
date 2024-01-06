@@ -1,0 +1,72 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h1>Enviar e-mail</h1>
+    <hr>
+
+    <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+      <p>E-mail enviado com sucesso.</p>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <ul>
+        <li *ngFor="let error of errorsMessages">{{ error }}</li>
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
+    </div>
+
+    <div class="card shadow bg-white rounded">
+      <div class="card-body">
+        <form (ngSubmit)="sendMail()" [formGroup]="form" #formDir="ngForm">
+          <div class="mb-3">
+            <label class="form-label">Nome: *</label>
+            <input
+              type="text"
+              formControlName="name"
+              class="form-control form-control-lg"
+              [class.is-invalid]="name.errors?.['required'] && formDir.submitted"
+            >
+            <div *ngIf="name.errors?.['required'] && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">E-mail: *</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control form-control-lg"
+              [class.is-invalid]="(email.errors?.['required'] || email.errors?.['email']) && formDir.submitted"
+            >
+            <div *ngIf="email.errors?.['required'] && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+            <div *ngIf="email.errors?.['email'] && formDir.submitted" class="form-text text-danger">E-mail inválido</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Assunto: *</label>
+            <input
+              type="text"
+              formControlName="subject"
+              class="form-control form-control-lg"
+              [class.is-invalid]="subject.errors?.['required'] && formDir.submitted"
+            >
+            <div *ngIf="subject.errors?.['required'] && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Mensagem: *</label>
+            <textarea
+              formControlName="message"
+              class="form-control form-control-lg"
+              [class.is-invalid]="message.errors?.['required'] && formDir.submitted"
+              cols="30"
+              rows="5"
+            ></textarea>
+            <div *ngIf="message.errors?.['required'] && formDir.submitted" class="form-text text-danger">Preencha este campo</div>
+          </div>
+
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
