@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from 'src/app/services/contact.service';
+import { io } from "socket.io-client";
 
 @Component({
   selector: 'app-contact',
@@ -12,8 +13,26 @@ export class ContactComponent implements OnInit {
   errorsMessages: Array<any> = [];
   success: boolean = false;
   error: boolean = false;
+  title = 'anuglar';
+  socket: any;
+  msg: string= '';
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService) {
+    const socket = io("http://localhost:3000");
+
+    socket.on("connect", () => {
+      console.log('connect');
+
+      socket.emit('notification', {
+        id: 1,
+        name: 'User'
+      });
+    });
+
+    socket.on('test', function(data: any) {
+      console.log('Message:', data);
+    });
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup({
