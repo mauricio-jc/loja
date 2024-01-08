@@ -20,16 +20,7 @@ export class ContactComponent implements OnInit {
   constructor(private contactService: ContactService) {
     const socket = io("http://localhost:3000");
 
-    socket.on("connect", () => {
-      console.log('connect');
-
-      socket.emit('notification', {
-        id: 1,
-        name: 'User'
-      });
-    });
-
-    socket.on('test', function(data: any) {
+    socket.on('notification', function(data: any) {
       console.log('Message:', data);
     });
   }
