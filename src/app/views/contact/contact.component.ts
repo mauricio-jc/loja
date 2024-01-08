@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from 'src/app/services/contact.service';
 import { io } from "socket.io-client";
+import { Notification } from 'src/app/interfaces/notification';
 
 @Component({
   selector: 'app-contact',
@@ -14,16 +15,9 @@ export class ContactComponent implements OnInit {
   success: boolean = false;
   error: boolean = false;
   title = 'anuglar';
-  socket: any;
-  msg: string= '';
+  notifications: Notification[] = [];
 
-  constructor(private contactService: ContactService) {
-    const socket = io("http://localhost:3000");
-
-    socket.on('notification', function(data: any) {
-      console.log('Message:', data);
-    });
-  }
+  constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -31,6 +25,12 @@ export class ContactComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       subject: new FormControl('', [Validators.required]),
       message: new FormControl('', [Validators.required]),
+    });
+
+    const socket = io("http://localhost:3000");
+
+    socket.on('notification', (notification: any) => {
+      this.notifications.push(notification);
     });
   }
 
