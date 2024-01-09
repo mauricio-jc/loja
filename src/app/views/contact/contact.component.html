@@ -15,20 +15,6 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="hideAlert()"></button>
     </div>
 
-    <div class="card shadow bg-white rounded mb-5">
-      <div class="card-body">
-        <h2>Notificações</h2>
-        <hr>
-
-        <ul>
-          <li *ngFor="let notification of notifications">
-            <p>Título: {{ notification.title }}</p>
-            <p>Descrição: {{ notification.description }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
     <div class="card shadow bg-white rounded">
       <div class="card-body">
         <form (ngSubmit)="sendMail()" [formGroup]="form" #formDir="ngForm">
