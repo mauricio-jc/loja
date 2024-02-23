@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
 import { Categorie } from 'src/app/interfaces/categorie';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -16,14 +17,24 @@ export class CategoriesListComponent implements OnInit {
 
   constructor(private categoriesService: CategoriesService, private usersService: UsersService) { }
 
-  ngOnInit(): void {
-    this.listAll();
+  async ngOnInit(): Promise<void> {
+    await this.listAll();
   }
 
-  listAll() {
-    this.categoriesService.listAll().subscribe((r) => {
+  async listAll() {
+    // try {
+    //   const this.categories = await lastValueFrom(this.categoriesService.listAll());
+    // } catch (error: any) {
+    //   console.log(error);
+    // }
+
+    await lastValueFrom(this.categoriesService.listAll())
+    .then((r) => {
       this.categories = r;
     })
+    .catch((e) => {
+      console.log(e);
+    });
   }
 
   hideAlert() {
